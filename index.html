@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complejo Educativo Refugio Sifontes</title>
+<style>
+:root {
+  --site-primary: #155e75;
+  --site-secondary: #dcefe9;
+  --site-background: #f5f8f7;
+  --site-on-primary: #ffffff;
+  --site-on-secondary: #153b3c;
+  --site-on-background: #183238;
+  --site-font-body: "Segoe UI", Arial, sans-serif;
+  --site-font-heading: "Segoe UI", Arial, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); color: var(--site-on-background); background: var(--site-background); line-height: 1.6; }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); border-radius: 0; }
+a { color: inherit; }
+.topbar { background: var(--site-primary); color: var(--site-on-primary); padding: calc(9px * var(--site-spacing-scale)) 5vw; display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:.9rem; }
+.brand { display:flex; align-items:center; gap:14px; }
+.logo { width:54px; height:54px; border-radius:50%; display:grid; place-items:center; color:var(--site-primary); background:#fff; font-weight:900; font-size:1.15rem; border:3px solid #c7e6db; flex-shrink:0; }
+.brand small { display:block; opacity:.85; }
+nav { display:flex; flex-wrap:wrap; gap:18px; justify-content:flex-end; }
+nav a { text-decoration:none; font-weight:650; font-size:.9rem; }
+nav a:hover { text-decoration:underline; }
+.hero { background:linear-gradient(120deg, #0e4354, #167b82); color:#fff; padding:76px 6vw 82px; position:relative; overflow:hidden; }
+.hero:after { content:""; position:absolute; width:360px; height:360px; border:50px solid rgba(255,255,255,.08); border-radius:50%; right:-60px; top:-110px; pointer-events:none; }
+.hero-inner { max-width:1100px; margin:auto; position:relative; z-index:1; }
+.eyebrow { text-transform:uppercase; letter-spacing:.15em; font-size:.8rem; font-weight:800; color:#b8e9d8; }
+h1,h2,h3 { font-family:var(--site-font-heading); line-height:1.15; }
+h1 { font-size:clamp(2.3rem, 5vw, 4.3rem); max-width:820px; margin:14px 0 18px; letter-spacing:-.04em; }
+.hero p { max-width:680px; font-size:1.12rem; color:#e2f4f2; }
+.actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.btn { display:inline-block; padding:12px 19px; border-radius:calc(12px * var(--site-radius-scale)); font-weight:750; text-decoration:none; border:1px solid transparent; cursor:pointer; }
+.btn-light { background:#fff; color:#124a57; }
+.btn-outline { border-color:rgba(255,255,255,.65); color:#fff; }
+main { max-width:1120px; margin:auto; padding:0 24px 64px; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:-30px; position:relative; z-index:2; }
+.stat { background:#fff; padding:22px; border-radius:calc(16px * var(--site-radius-scale)); box-shadow:0 8px 24px rgba(18,63,70,.08); border:1px solid #e1ece8; }
+.stat strong { display:block; color:var(--site-primary); font-size:1.2rem; }
+.stat span { font-size:.9rem; color:#527078; }
+.section { padding-top:64px; scroll-margin-top:24px; }
+.section-head { max-width:700px; margin-bottom:25px; }
+.section-head .eyebrow { color:#147a78; }
+h2 { font-size:calc(clamp(1.8rem, 3vw, 2.6rem) * var(--site-heading-scale)); margin:10px 0 12px; letter-spacing:-.03em; }
+.muted { color:#567078; }
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.card { background:#fff; border:1px solid #dfebe7; border-radius:calc(16px * var(--site-radius-scale)); padding:24px; }
+.card .icon { width:46px; height:46px; border-radius:13px; display:grid; place-items:center; background:var(--site-secondary); color:var(--site-primary); font-size:1.35rem; margin-bottom:18px; }
+.card h3 { margin:0 0 10px; font-size:1.15rem; }
+.pill { display:inline-block; font-size:.78rem; font-weight:750; background:#e3f2ec; color:#17635e; border-radius:999px; padding:5px 10px; margin:4px 4px 0 0; }
+.split { display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:stretch; }
+.feature { background:#e5f1ec; border-radius:calc(18px * var(--site-radius-scale)); padding:30px; }
+.feature h3 { font-size:1.35rem; margin-top:0; }
+.list { padding-left:20px; }
+.list li { margin:9px 0; }
+.callout { margin-top:22px; padding:20px 22px; background:#fff; border-left:4px solid #168078; border-radius:8px; }
+.table-wrap { overflow-x:auto; background:#fff; border:1px solid #dfebe7; border-radius:14px; }
+table { width:100%; border-collapse:collapse; min-width:520px; }
+th,td { text-align:left; padding:15px 18px; border-bottom:1px solid #e6efec; }
+th { background:#e6f2ee; color:#174c52; }
+tr:last-child td { border-bottom:0; }
+.event { border-top:3px solid #178078; }
+.event small { color:#16736e; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+details { border:1px solid #dfebe7; background:#fff; padding:16px 18px; border-radius:12px; margin:10px 0; }
+summary { cursor:pointer; font-weight:750; }
+.contact { background:#123e4b; color:white; border-radius:calc(20px * var(--site-radius-scale)); padding:32px; display:grid; grid-template-columns:1.1fr .9fr; gap:28px; }
+.contact .muted { color:#d0e6e5; }
+.contact a { color:#fff; }
+footer { background:#0c303b; color:#d2e5e5; padding:25px 6vw; font-size:.9rem; text-align:center; }
+.notice { font-size:.88rem; color:#60767a; margin-top:14px; }
+@media(max-width:800px) {
+ .topbar { align-items:flex-start; flex-direction:column; }
+ nav { justify-content:flex-start; gap:12px; }
+ .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .split,.contact { grid-template-columns:1fr; }
+}
+@media(max-width:560px) {
+ .hero { padding:58px 24px 68px; }
+ main { padding:0 16px 48px; }
+ .stats { grid-template-columns:1fr; margin-top:18px; }
+ .grid { grid-template-columns:1fr; }
+ .section { padding-top:46px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-label="Iniciales RS">RS</div>
+      <div><strong>Complejo Educativo Refugio Sifontes</strong><small>Educación con valores y principios</small></div>
+    </div>
+    <nav aria-label="Navegación principal">
+      <a href="#institucion">Institución</a><a href="#niveles">Niveles</a><a href="#bachilleratos">Bachilleratos</a><a href="#actividades">Actividades</a><a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Ciudad Delgado · San Salvador · El Salvador</div>
+      <h1>Aprender hoy para construir un mejor mañana.</h1>
+      <p>Bienvenidos al Complejo Educativo Refugio Sifontes: una comunidad educativa comprometida con la formación académica, los valores y el desarrollo integral de sus estudiantes.</p>
+      <div class="actions"><a class="btn btn-light" href="#bachilleratos">Conoce nuestros bachilleratos</a><a class="btn btn-outline" href="#contacto">Información de contacto</a></div>
+    </div>
+  </header>
+  <main>
+    <section class="stats" aria-label="Datos del centro">
+      <div class="stat"><strong>Código 11782</strong><span>Código de infraestructura del centro educativo</span></div>
+      <div class="stat"><strong>Formación integral</strong><span>Conocimiento, valores y responsabilidad</span></div>
+      <div class="stat"><strong>Educación pública</strong><span>Servicio educativo en Ciudad Delgado</span></div>
+    </section>
+    <section class="section" id="institucion">
+      <div class="section-head"><div class="eyebrow">Nuestra institución</div><h2>Una comunidad que aprende y crece</h2><p class="muted">La educación es una tarea compartida entre estudiantes, docentes y familias. Nuestro sitio presenta información general del centro y sus opciones educativas.</p></div>
+      <div class="split">
+        <article class="feature"><h3>🎯 Misión</h3><p>Contribuir a la formación integral de estudiantes, fortaleciendo sus conocimientos científicos, sus principios morales y su capacidad para tomar decisiones responsables que aporten a la sociedad.</p></article>
+        <article class="feature"><h3>🌱 Visión</h3><p>Ser una institución educativa reconocida por su compromiso con la excelencia académica, la práctica de valores, el carácter y el uso responsable de la tecnología.</p></article>
+      </div>
+      <div class="callout"><strong>Nuestro compromiso:</strong> fomentar el respeto, la convivencia, la responsabilidad, la participación y el aprendizaje continuo.</div>
+    </section>
+    <section class="section" id="niveles">
+      <div class="section-head"><div class="eyebrow">Trayectoria educativa</div><h2>Etapas de formación</h2><p class="muted">La oferta exacta y la disponibilidad de grados puede variar por año lectivo. Consulta con la administración para confirmar cupos y horarios.</p></div>
+      <div class="grid">
+        <article class="card"><div class="icon">🧸</div><h3>Parvularia</h3><p class="muted">Primeros aprendizajes, convivencia, creatividad y desarrollo de habilidades básicas.</p><span class="pill">Desarrollo inicial</span></article>
+        <article class="card"><div class="icon">📚</div><h3>Educación básica</h3><p class="muted">Fortalecimiento de lectura, escritura, matemática, ciencias, ciudadanía y trabajo en equipo.</p><span class="pill">Aprendizaje integral</span></article>
+        <article class="card"><div class="icon">🎓</div><h3>Educación media</h3><p class="muted">Preparación académica y técnica para continuar estudios o incorporarse al mundo laboral.</p><span class="pill">Proyección profesional</span></article>
+      </div>
+    </section>
+    <section class="section" id="bachilleratos">
+      <div class="section-head"><div class="eyebrow">Educación media</div><h2>Bachilleratos técnicos</h2><p class="muted">La documentación pública del MINED registra estas modalidades para el Complejo Educativo Refugio Sifontes.</p></div>
+      <div class="grid">
+        <article class="card"><div class="icon">🧾</div><h3>Bachillerato Técnico Vocacional Administrativo Contable</h3><p>Conocimientos relacionados con procesos administrativos, registros contables, organización de información y apoyo a la gestión de una empresa.</p><span class="pill">Administración</span><span class="pill">Contabilidad</span></article>
+        <article class="card"><div class="icon">💻</div><h3>Bachillerato Técnico Vocacional en Infraestructura Tecnológica y Servicios Informáticos</h3><p>Formación orientada a equipos informáticos, redes, soporte técnico, aplicaciones y fundamentos de seguridad informática.</p><span class="pill">Informática</span><span class="pill">Redes y soporte</span></article>
+        <article class="card"><div class="icon">🧠</div><h3>Habilidades para el futuro</h3><p>En ambas áreas son valiosas la comunicación, el pensamiento lógico, la ética, el trabajo colaborativo y la resolución de problemas.</p><span class="pill">Trabajo en equipo</span><span class="pill">Responsabilidad</span></article>
+      </div>
+      <p class="notice">Nota: las descripciones son orientativas, no una lista oficial de módulos vigentes. Solicita el plan de estudios actualizado en el centro.</p>
+    </section>
+    <section class="section" id="plan">
+      <div class="section-head"><div class="eyebrow">Información académica</div><h2>Áreas de aprendizaje</h2><p class="muted">Un resumen de áreas que pueden formar parte de la experiencia escolar; confirma la asignación exacta según grado y plan vigente.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Área</th><th>¿Qué fortalece?</th><th>Aplicación</th></tr></thead><tbody>
+        <tr><td>Lenguaje y literatura</td><td>Lectura, escritura y expresión</td><td>Comunicación clara</td></tr>
+        <tr><td>Matemática</td><td>Razonamiento y análisis</td><td>Resolución de problemas</td></tr>
+        <tr><td>Ciencias y estudios sociales</td><td>Comprensión del entorno</td><td>Pensamiento crítico y ciudadanía</td></tr>
+        <tr><td>Inglés</td><td>Comprensión y comunicación</td><td>Acceso a recursos globales</td></tr>
+        <tr><td>Área técnica</td><td>Competencias profesionales</td><td>Administración contable o informática</td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="section" id="actividades">
+      <div class="section-head"><div class="eyebrow">Vida estudiantil</div><h2>Actividades y comunidad</h2><p class="muted">Espacio para compartir proyectos, jornadas y logros institucionales. Las actividades aquí descritas son propuestas de contenido y no un calendario confirmado.</p></div>
+      <div class="grid">
+        <article class="card event"><small>Aprender haciendo</small><h3>Exposiciones académicas</h3><p class="muted">Presentación de investigaciones, experimentos y proyectos desarrollados en clase.</p></article>
+        <article class="card event"><small>Convivencia</small><h3>Actos cívicos y valores</h3><p class="muted">Actividades que promueven respeto, identidad, participación y sentido de comunidad.</p></article>
+        <article class="card event"><small>Innovación</small><h3>Proyectos técnicos</h3><p class="muted">Demostraciones de habilidades en tecnología, informática, organización y emprendimiento.</p></article>
+      </div>
+    </section>
+    <section class="section" id="preguntas">
+      <div class="section-head"><div class="eyebrow">Preguntas frecuentes</div><h2>¿Necesitas más información?</h2></div>
+      <details><summary>¿Dónde está ubicado el centro?</summary><p>En Avenida Paleca n.º 52, Ciudad Delgado, departamento de San Salvador, El Salvador.</p></details>
+      <details><summary>¿Cómo puedo confirmar los requisitos de matrícula?</summary><p>Contacta directamente con la administración para consultar fechas, documentación requerida, cupos y horarios del año lectivo vigente.</p></details>
+      <details><summary>¿Qué bachilleratos técnicos se registran públicamente?</summary><p>Administrativo Contable e Infraestructura Tecnológica y Servicios Informáticos. Confirma con el centro si ambas modalidades se encuentran activas y disponibles para el próximo ingreso.</p></details>
+    </section>
+    <section class="section" id="contacto">
+      <div class="contact">
+        <div><div class="eyebrow">Estamos para orientarte</div><h2>Contacto y ubicación</h2><p class="muted">Para datos actualizados sobre matrícula, turnos, personal y actividades, utiliza los canales oficiales del centro.</p></div>
+        <div>
+          <p><strong>📍 Dirección</strong><br>Avenida Paleca n.º 52, Ciudad Delgado, San Salvador, El Salvador</p>
+          <p><strong>☎ Teléfono publicado</strong><br><a href="tel:+50322768111">2276-8111</a></p>
+          <p><strong>✉ Correo publicado anteriormente</strong><br><a href="mailto:cersifontes@hotmail.es">cersifontes@hotmail.es</a></p>
+          <p><strong>🌐 Redes</strong><br>Busca “Complejo Educativo Refugio Sifontes” en Facebook y verifica que sea la página institucional.</p>
+        </div>
+      </div>
+      <p class="notice">Este prototipo no es una página oficial del centro. Algunos datos de contacto proceden de directorios o páginas antiguas y deben verificarse antes de publicarse.</p>
+    </section>
+  </main>
+  <footer>Complejo Educativo Refugio Sifontes · Ciudad Delgado, San Salvador · El Salvador<br>Año 2027</footer>
+</div>
+</body>
+</html>
